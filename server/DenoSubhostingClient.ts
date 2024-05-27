@@ -22,6 +22,7 @@ export class DenoSubhostingClient {
             body: JSON.stringify({ name }),
         });
 
+        await this.validateResponse(response);
         return await response.json();
     }
 
@@ -46,6 +47,18 @@ export class DenoSubhostingClient {
             }),
         });
 
+        await this.validateResponse(response);
         return await response.json();
+    }
+
+    private async validateResponse(response: Response) {
+        if (!response.ok) {
+            const body = await response.text();
+            throw new Error(
+                `Request failed with status code ${response.status}.\n
+                ${response.statusText}\n
+                ${body}`
+            );
+        }
     }
 }
