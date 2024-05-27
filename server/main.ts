@@ -1,5 +1,6 @@
 import { Application } from "jsr:@oak/oak/application";
 import { Router } from "jsr:@oak/oak/router";
+import routeStaticFilesFrom from "./routeStaticFilesFrom.ts";
 
 export const app = new Application();
 const router = new Router();
@@ -9,23 +10,10 @@ router.get("/api", (ctx) => {
 });
 
 app.use(router.routes());
-app.use(async (context, next) => {
-  const staticPaths = [
-    `${Deno.cwd()}/client/dist`,
-    `${Deno.cwd()}/client/public`,
-  ];
-
-  for (const path of staticPaths) {
-    try {
-      await context.send({ root: path, index: "index.html" });
-      return;
-    } catch {
-      continue;
-    }
-  }
-
-  await next();
-});
+app.use(routeStaticFilesFrom([
+  `${Deno.cwd()}/client/dist`,
+  `${Deno.cwd()}/client/public`,
+]));
 
 
 if (import.meta.main) {
