@@ -1,6 +1,6 @@
 import { Application } from "jsr:@oak/oak/application";
 import { Router } from "jsr:@oak/oak/router";
-import routeStaticFilesFrom from "./util/routeStaticFilesFrom.ts";
+import routeStaticFilesFrom from "../client/src/util/routeStaticFilesFrom.ts";
 import sampleCodeGet from "./commands/sampleCodeGet.ts";
 import projectCreateOrUpdate from "./commands/projectCreateOrUpdate.ts";
 import deploymentGet from "./commands/deploymentGet.ts";

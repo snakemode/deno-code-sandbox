@@ -1,3 +1,5 @@
+import doUntil from "./doUntil.ts";
+
 export default class ApiClient {
     constructor(private readonly baseUrl: string = "") { }
 
@@ -32,8 +34,14 @@ export default class ApiClient {
         return await response.json();
     }
 
-    public async getDeployment(id: string): Promise<Deployment> {
+    public async getDeployment(id: string): Promise<ProjectDeployment> {
         const response = await fetch(`${this.baseUrl}/api/deployment/${id}`);
         return await response.json();
+    }
+
+    public async waitForDeployment(deploymentId: string) {
+        return await doUntil(async () => {
+            return await this.getDeployment(deploymentId);
+        }, (response) => response.deployment.status !== 'pending');
     }
 }

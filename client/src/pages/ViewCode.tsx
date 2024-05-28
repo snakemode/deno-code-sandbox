@@ -17,8 +17,8 @@ export default function ViewCode() {
   
     const fork = async () => {
         const responseJson = await client.createProject(code); 
-        navigate(`/edit/${responseJson.project.id}`);        
-    };    
+        navigate(`/edit/${responseJson.project.id}?deployment=${responseJson.deployment.id}`);        
+    };
   
     return (
       <div className="editor">

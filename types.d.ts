@@ -28,8 +28,8 @@ interface Deployment {
 // API response types
 
 interface ProjectDeployment {
-    project: Project;
     deployment: Deployment;
+    project: Project;
     url: string;
 }
 

@@ -1,7 +1,7 @@
 import { RouterContext } from "jsr:@oak/oak/router";
 import handleErrors from "./shared/handleErrors.ts";
 import { DenoSubhostingClient } from "../deno-api/DenoSubhostingClient.ts";
-import createUrl from "../util/createUrl.ts";
+import createUrl from "./shared/createUrl.ts";
 
 const sampleCode = Deno.readTextFileSync(`${Deno.cwd()}/server/samples/code.ts`);
 
