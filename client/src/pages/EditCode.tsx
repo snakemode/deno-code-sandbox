@@ -6,6 +6,7 @@ export default function EditCode() {
 
     const [code, setCode] = useState<string>('');
     const [deployedUrl, setDeployedUrl] = useState<string>('');
+    const [status, setStatus] = useState<string>('pending');
     const updateCode = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setCode(e.target.value);
     };
@@ -39,19 +40,24 @@ export default function EditCode() {
           const response = await fetch(`/api/deployment/${deployment.id}`);
           const responseBody = await response.json();
           deployment = responseBody.deployment;
+          setStatus(deployment.status);
       }
 
       setDeployedUrl(url)
     };
 
-    const previewElement = deployedUrl 
-    ? (<iframe src={deployedUrl} title="sandbox" className="sandbox" />) 
-    : <div>Waiting...</div>;
+    const previewElement = deployedUrl && status === 'success'
+    ? (<div>
+        <div>{deployedUrl}</div>
+        <iframe src={deployedUrl} title="sandbox" className="sandbox" />
+      </div>
+    ) 
+    : <div>{status}</div>;
   
     return (
       <div className="editor">
         <textarea className="code" value={code} onChange={updateCode} />        
-        <button className="run" onClick={update}>Save Update</button>
+        <button className="run" onClick={update}>Run</button>
         {previewElement}
       </div>
     )
