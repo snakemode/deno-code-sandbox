@@ -1,3 +1,6 @@
+import * as mod from '@std/dotenv';
+const env = await mod.load();
+
 export class DenoSubhostingClient {
     private API: string;
     private accessToken: string | undefined;
@@ -6,8 +9,11 @@ export class DenoSubhostingClient {
 
     constructor() {
         this.API = "https://api.deno.com/v1";
-        this.accessToken = Deno.env.get("DEPLOY_ACCESS_TOKEN");
-        this.orgId = Deno.env.get("DEPLOY_ORG_ID");
+        this.accessToken = env["DEPLOY_ACCESS_TOKEN"];
+        this.orgId = env["DEPLOY_ORG_ID"];
+
+        console.log(this.accessToken, this.orgId);
+        console.log(this.API);
 
         this.headers = {
             Authorization: `Bearer ${this.accessToken}`,

@@ -1,7 +1,7 @@
 import { Context } from "jsr:@oak/oak/context";
 import { DenoSubhostingClient } from "../DenoSubhostingClient.ts";
 
-export default async function(ctx: Context<Record<string, object>>) {
+export default async function (ctx: Context<Record<string, object>>) {
     const client = new DenoSubhostingClient();
 
     try {

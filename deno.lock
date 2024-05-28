@@ -15,6 +15,7 @@
       "jsr:@std/bytes@^0.223.0": "jsr:@std/bytes@0.223.0",
       "jsr:@std/crypto@0.222": "jsr:@std/crypto@0.222.1",
       "jsr:@std/crypto@0.223": "jsr:@std/crypto@0.223.0",
+      "jsr:@std/dotenv@^0.224.0": "jsr:@std/dotenv@0.224.0",
       "jsr:@std/encoding@^0.222.1": "jsr:@std/encoding@0.222.1",
       "jsr:@std/encoding@^0.223.0": "jsr:@std/encoding@0.223.0",
       "jsr:@std/fmt@^0.221.0": "jsr:@std/fmt@0.221.0",
@@ -37,6 +38,7 @@
       "npm:react-dom": "npm:react-dom@18.3.1_react@18.3.1",
       "npm:react-dom@^18.2.0": "npm:react-dom@18.3.1_react@18.3.1",
       "npm:react-dom@^18.3.1": "npm:react-dom@18.3.1_react@18.3.1",
+      "npm:react-router-dom@^6.23.1": "npm:react-router-dom@6.23.1_react@18.3.1_react-dom@18.3.1__react@18.3.1",
       "npm:react@^18.2.0": "npm:react@18.3.1",
       "npm:react@^18.3": "npm:react@18.3.1",
       "npm:react@^18.3.1": "npm:react@18.3.1",
@@ -108,6 +110,9 @@
           "jsr:@std/assert@^0.223.0",
           "jsr:@std/encoding@^0.223.0"
         ]
+      },
+      "@std/dotenv@0.224.0": {
+        "integrity": "d9234cdf551507dcda60abb6c474289843741d8c07ee8ce540c60f5c1b220a1d"
       },
       "@std/encoding@0.222.1": {
         "integrity": "fb6c1d38722feebc8d4a5efa3eb2039ecec0d50d053186240484d0c4a4ce1006"
@@ -463,6 +468,10 @@
           "@jridgewell/sourcemap-codec": "@jridgewell/sourcemap-codec@1.4.15"
         }
       },
+      "@remix-run/router@1.16.1": {
+        "integrity": "sha512-es2g3dq6Nb07iFxGk5GuHN20RwBZOsuDQN7izWIisUcv9r+d2C5jQxqmgkdebXgReWfiyUabcki6Fg77mSNrig==",
+        "dependencies": {}
+      },
       "@rollup/rollup-android-arm-eabi@4.18.0": {
         "integrity": "sha512-Tya6xypR10giZV1XzxmH5wr25VcZSncG0pZIjfePT0OVBvqNEurzValetGNarVrGiq66EBVAFn15iYX4w6FKgQ==",
         "dependencies": {}
@@ -757,6 +766,22 @@
         "integrity": "sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==",
         "dependencies": {}
       },
+      "react-router-dom@6.23.1_react@18.3.1_react-dom@18.3.1__react@18.3.1": {
+        "integrity": "sha512-utP+K+aSTtEdbWpC+4gxhdlPFwuEfDKq8ZrPFU65bbRJY+l706qjR7yaidBpo3MSeA/fzwbXWbKBI6ftOnP3OQ==",
+        "dependencies": {
+          "@remix-run/router": "@remix-run/router@1.16.1",
+          "react": "react@18.3.1",
+          "react-dom": "react-dom@18.3.1_react@18.3.1",
+          "react-router": "react-router@6.23.1_react@18.3.1"
+        }
+      },
+      "react-router@6.23.1_react@18.3.1": {
+        "integrity": "sha512-fzcOaRF69uvqbbM7OhvQyBTFDVrrGlsFdS3AL+1KfIBtGETibHzi3FkoTRyiDJnWNc2VxrfvR+657ROHjaNjqQ==",
+        "dependencies": {
+          "@remix-run/router": "@remix-run/router@1.16.1",
+          "react": "react@18.3.1"
+        }
+      },
       "react@18.3.1": {
         "integrity": "sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==",
         "dependencies": {
@@ -833,12 +858,18 @@
       }
     }
   },
-  "remote": {},
+  "remote": {
+    "https://deno.land/std@0.224.0/dotenv/mod.ts": "0180eaeedaaf88647318811cdaa418cc64dc51fb08354f91f5f480d0a1309f7d",
+    "https://deno.land/std@0.224.0/dotenv/parse.ts": "09977ff88dfd1f24f9973a338f0f91bbdb9307eb5ff6085446e7c423e4c7ba0c",
+    "https://deno.land/std@0.224.0/dotenv/stringify.ts": "275da322c409170160440836342eaa7cf012a1d11a7e700d8ca4e7f2f8aa4615"
+  },
   "workspace": {
     "dependencies": [
+      "jsr:@std/dotenv@^0.224.0",
       "npm:@types/react@^18.3.3",
       "npm:@vitejs/plugin-react@^4.3.0",
       "npm:react-dom@^18.3.1",
+      "npm:react-router-dom@^6.23.1",
       "npm:react@^18.3.1",
       "npm:vite@^5.2.11"
     ]
