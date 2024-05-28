@@ -8,7 +8,7 @@ import deploymentGet from "./commands/deploymentGet.ts";
 export const app = new Application();
 const router = new Router();
 router.get("/api/sample", sampleCodeGet)
-router.post("/api/create", projectCreateOrUpdate)
+router.post("/api/project", projectCreateOrUpdate)
 router.post("/api/project/:id", projectCreateOrUpdate);
 router.get("/api/deployment/:id", deploymentGet);
 

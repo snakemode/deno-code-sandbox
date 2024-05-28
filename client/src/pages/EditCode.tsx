@@ -28,9 +28,9 @@ export default function EditCode() {
 
       const response = await doUntil(async () => {
           return await client.getDeployment(deployment.id);
-      }, (response) => response.deployment.status !== 'pending');
+      }, (deployment) => deployment.status !== 'pending');
 
-      setStatus(response.deployment.status);
+      setStatus(response.status);
       setDeployedUrl(url)
     };
 

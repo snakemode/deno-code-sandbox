@@ -7,7 +7,7 @@ export default class ApiClient {
     }
 
     public async createProject(code: string): Promise<ProjectDeployment> {
-        const response = await fetch(`${this.baseUrl}/api/create`, {
+        const response = await fetch(`${this.baseUrl}/api/project`, {
             method: 'POST',
             body: JSON.stringify({ code })
         });
@@ -32,7 +32,7 @@ export default class ApiClient {
         return await response.json();
     }
 
-    public async getDeployment(id: string): Promise<ProjectDeployment> {
+    public async getDeployment(id: string): Promise<Deployment> {
         const response = await fetch(`${this.baseUrl}/api/deployment/${id}`);
         return await response.json();
     }
