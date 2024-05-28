@@ -1,5 +1,8 @@
 import React from 'react';
 
+// This component is used to display the deployment URL along
+// with an iframe to preview the deployed project.
+
 export type Props = { url: string, status: string };
 export default function DeploymentViewer(props: Props) {
     const { url, status } = props;

@@ -24,6 +24,8 @@ export default function EditCode() {
 
   // OPTIONAL:
   // Pre-load the deployment triggered on redirect from ViewCode
+  // A nice UX touch - grabbing the deploymentId from the URL
+  // so that the user can see the deployment status immediately
   useEffect(() => {
     if (!searchParams.has('deployment')) return;
     
@@ -37,9 +39,11 @@ export default function EditCode() {
       setSearchParams(searchParams.toString());
     })();    
   }, []);
-      
+
   // UI Callbacks
   const deployChanges = async () => {
+    // This will create a new deployment and generate a new URL.
+    // The serve isn't ready until the `waitForDeployment` promise resolves.
     const { deployment } = await client.deployProject(code, id!);
     const response = await client.waitForDeployment(deployment.id);
 

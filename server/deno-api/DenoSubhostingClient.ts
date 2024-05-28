@@ -1,6 +1,8 @@
 import * as mod from '@std/dotenv';
 const env = await mod.load();
 
+// This client class captures all the API calls we need to make to the Deno Subhosting API
+// It wraps the fetch API to keep the noise out of the commands
 export class DenoSubhostingClient {
     private API: string;
     private accessToken: string | undefined;
@@ -81,6 +83,8 @@ export class DenoSubhostingClient {
     }
 
     private async validateResponse(response: Response) {
+        // A real application would wire in telemetry here
+
         console.log("Validating response", response.status, response.statusText, response.ok, response.url,);
 
         if (!response.ok) {

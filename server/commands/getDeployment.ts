@@ -11,6 +11,8 @@ export default async function (ctx: RouterContext<string, Record<string, string>
         let project: Project | undefined;
         const deployment = await client.getDeployment(ctx?.params?.id);
 
+        // Only grab the extra projecxt info if the deployment is done
+        // This way we don't spam the API too much
         if (deployment.status === "success" || deployment.status === "failed") {
             project = await client.getProject(deployment.projectId);
             url = createUrl(project, deployment);

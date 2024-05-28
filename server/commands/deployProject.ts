@@ -11,6 +11,8 @@ export default async function (ctx: RouterContext<string, Record<string, string>
         const id = ctx?.params?.id || (await client.createProject()).id;
         const code = ctx?.request?.body ? (await ctx?.request?.body.json()).code : sampleCode;
 
+        // Slightly overcooked here given we're just using one file
+        // But we could add multiple files to the deployment here.
         const files = new Map<string, string>();
         files.set("main.ts", code);
 

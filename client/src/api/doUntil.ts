@@ -1,3 +1,6 @@
+// Rudimentary resilience that retries a task until a condition is met
+// Used to poll for deloyment completion in the client without hanging forever.
+
 export default async function doUntil<TReturns>(
     task: () => Promise<TReturns>,
     until: (returns: TReturns) => boolean
