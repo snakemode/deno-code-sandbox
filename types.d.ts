@@ -1,3 +1,5 @@
+// Deno Subhosting API response types
+
 interface Project {
     id: string;
     name: string;
@@ -21,4 +23,16 @@ interface Deployment {
     };
     createdAt: string;
     updatedAt: string;
+}
+
+// API response types
+
+interface ProjectDeployment {
+    project: Project;
+    deployment: Deployment;
+    url: string;
+}
+
+interface SampleCode {
+    code: string;
 }
