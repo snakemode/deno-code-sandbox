@@ -22,6 +22,7 @@ export default function EditCode() {
     })();
   }, []);
 
+  // OPTIONAL:
   // Pre-load the deployment triggered on redirect from ViewCode
   useEffect(() => {
     if (!searchParams.has('deployment')) return;
@@ -39,7 +40,7 @@ export default function EditCode() {
       
   // UI Callbacks
   const deployChanges = async () => {
-    const { deployment } = await client.createDeployment(code, id!);
+    const { deployment } = await client.deployProject(code, id!);
     const response = await client.waitForDeployment(deployment.id);
 
     setUrl(response.url)

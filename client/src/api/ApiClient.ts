@@ -8,7 +8,7 @@ export default class ApiClient {
         return (await response.json()).code;
     }
 
-    public async createDeployment(code: string, id?: string): Promise<ProjectDeployment> {
+    public async deployProject(code: string, id?: string): Promise<ProjectDeployment> {
         const idSuffix = id ? `/${id}` : '';
 
         const response = await fetch(`${this.baseUrl}/api/project${idSuffix}`, {
