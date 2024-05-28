@@ -2,16 +2,15 @@ import { Application } from "jsr:@oak/oak/application";
 import { Router } from "jsr:@oak/oak/router";
 import routeStaticFilesFrom from "./util/routeStaticFilesFrom.ts";
 import sampleCodeGet from "./commands/sampleCodeGet.ts";
-import projectCreate from "./commands/projectCreate.ts";
-import projectUpdate from "./commands/projectUpdate.ts";
+import projectCreateOrUpdate from "./commands/projectCreateOrUpdate.ts";
 import projectGet from "./commands/projectGet.ts";
 import deploymentGet from "./commands/deploymentGet.ts";
 
 export const app = new Application();
 const router = new Router();
 router.get("/api/sample", sampleCodeGet)
-router.post("/api/create", projectCreate)
-router.post("/api/project/:id", projectUpdate);
+router.post("/api/create", projectCreateOrUpdate)
+router.post("/api/project/:id", projectCreateOrUpdate);
 router.get("/api/project/:id", projectGet);
 router.get("/api/deployment/:id", deploymentGet);
 
