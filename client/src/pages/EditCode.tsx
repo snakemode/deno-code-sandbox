@@ -39,7 +39,7 @@ export default function EditCode() {
       
   // UI Callbacks
   const deployChanges = async () => {
-    const { deployment } = await client.createDeployment(id!, code);
+    const { deployment } = await client.createDeployment(code, id!);
     const response = await client.waitForDeployment(deployment.id);
 
     setUrl(response.url)

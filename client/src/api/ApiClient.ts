@@ -8,21 +8,10 @@ export default class ApiClient {
         return (await response.json()).code;
     }
 
-    public async createProject(code: string): Promise<ProjectDeployment> {
-        const response = await fetch(`${this.baseUrl}/api/project`, {
-            method: 'POST',
-            body: JSON.stringify({ code })
-        });
+    public async createDeployment(code: string, id?: string): Promise<ProjectDeployment> {
+        const idSuffix = id ? `/${id}` : '';
 
-        if (!response.ok) {
-            throw new Error('Failed to create project');
-        }
-
-        return await response.json();
-    }
-
-    public async createDeployment(id: string, code: string): Promise<ProjectDeployment> {
-        const response = await fetch(`${this.baseUrl}/api/project/${id}`, {
+        const response = await fetch(`${this.baseUrl}/api/project${idSuffix}`, {
             method: 'POST',
             body: JSON.stringify({ code })
         });
