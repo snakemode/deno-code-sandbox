@@ -16,7 +16,7 @@ export default function ViewCode() {
     }, []);  
     
   
-    const remix = async () => {
+    const fork = async () => {
         const res = await fetch('/api/create', {
           method: 'POST',
           headers: {
@@ -27,15 +27,15 @@ export default function ViewCode() {
 
         if (res.ok) {  
             const responseJson = await res.json();    
-            navigate(`/edit/${responseJson.projectId}`);
+            navigate(`/edit/${responseJson.project.id}`);
         }
-      };
+    };
     
   
     return (
       <div className="editor">
         <pre className="code">{code}</pre>
-        <button className="run" onClick={remix}>Remix Code</button>
+        <button className="run" onClick={fork}>Create Interactive Sandbox</button>
       </div>
     )
   }

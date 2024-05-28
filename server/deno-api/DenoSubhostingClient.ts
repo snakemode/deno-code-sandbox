@@ -12,8 +12,13 @@ export class DenoSubhostingClient {
         this.accessToken = env["DEPLOY_ACCESS_TOKEN"];
         this.orgId = env["DEPLOY_ORG_ID"];
 
-        console.log(this.accessToken, this.orgId);
-        console.log(this.API);
+        if (!this.accessToken) {
+            throw new Error("env DEPLOY_ACCESS_TOKEN is required");
+        }
+
+        if (!this.orgId) {
+            throw new Error("env DEPLOY_ORG_ID is required");
+        }
 
         this.headers = {
             Authorization: `Bearer ${this.accessToken}`,
@@ -21,7 +26,7 @@ export class DenoSubhostingClient {
         };
     }
 
-    public async createProject(name: string = "") {
+    public async createProject(name: string | null = null) {
         const response = await fetch(`${this.API}/organizations/${this.orgId}/projects`, {
             method: "POST",
             headers: this.headers,
@@ -29,7 +34,16 @@ export class DenoSubhostingClient {
         });
 
         await this.validateResponse(response);
-        return await response.json();
+        return await response.json() as Project;
+    }
+
+    public async getProject(id: string) {
+        const response = await fetch(`${this.API}/projects/${id}`, {
+            headers: this.headers,
+        });
+
+        await this.validateResponse(response);
+        return await response.json() as Project;
     }
 
     public async deployProject(id: string, files: Map<string, string>) {
@@ -54,10 +68,21 @@ export class DenoSubhostingClient {
         });
 
         await this.validateResponse(response);
-        return await response.json();
+        return await response.json() as Deployment;
+    }
+
+    public async getDeployment(id: string) {
+        const response = await fetch(`${this.API}/deployments/${id}`, {
+            headers: this.headers,
+        });
+
+        await this.validateResponse(response);
+        return await response.json() as Deployment;
     }
 
     private async validateResponse(response: Response) {
+        console.log("Validating response", response.status, response.statusText, response.ok, response.url,);
+
         if (!response.ok) {
             const body = await response.text();
             throw new Error(

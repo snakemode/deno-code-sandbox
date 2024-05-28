@@ -1,17 +1,21 @@
 import { Application } from "jsr:@oak/oak/application";
 import { Router } from "jsr:@oak/oak/router";
-import routeStaticFilesFrom from "./commands/routeStaticFilesFrom.ts";
-import retrieveSampleCode from "./commands/retrieveSampleCode.ts";
-import createDenoSubhostedProject from "./commands/createDenoSubhostedProject.ts";
+import routeStaticFilesFrom from "./util/routeStaticFilesFrom.ts";
+import sampleCodeGet from "./commands/sampleCodeGet.ts";
+import projectCreate from "./commands/projectCreate.ts";
+import projectUpdate from "./commands/projectUpdate.ts";
+import projectGet from "./commands/projectGet.ts";
+import deploymentGet from "./commands/deploymentGet.ts";
 
 export const app = new Application();
+const router = new Router();
+router.get("/api/sample", sampleCodeGet)
+router.post("/api/create", projectCreate)
+router.post("/api/project/:id", projectUpdate);
+router.get("/api/project/:id", projectGet);
+router.get("/api/deployment/:id", deploymentGet);
 
-app.use(new Router()
-  .get("/api/sample", retrieveSampleCode)
-  .post("/api/create", createDenoSubhostedProject)
-  .routes()
-);
-
+app.use(router.routes());
 app.use(routeStaticFilesFrom([
   `${Deno.cwd()}/client/dist`,
   `${Deno.cwd()}/client/public`,
