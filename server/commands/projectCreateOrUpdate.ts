@@ -4,40 +4,24 @@ import { DenoSubhostingClient } from "../deno-api/DenoSubhostingClient.ts";
 import createUrl from "./shared/createUrl.ts";
 
 const sampleCode = Deno.readTextFileSync(`${Deno.cwd()}/server/samples/code.ts`);
+const client = new DenoSubhostingClient();
 
 export default async function (ctx: RouterContext<string, Record<string, string>>) {
     await handleErrors(ctx, async () => {
-        let id: string | undefined;
-        let code: string = sampleCode;
+        const id = ctx?.params?.id || (await client.createProject()).id;
+        const code = ctx?.request?.body ? (await ctx?.request?.body.json()).code : sampleCode;
 
-        if (ctx?.params?.id) {
-            id = ctx?.params?.id;
-            code = (await ctx.request.body.json()).code;
-        }
+        const files = new Map<string, string>();
+        files.set("main.ts", code);
 
-        const result = await deployProject(code, id);
+        const project = await client.getProject(id);
+        const deployment = await client.deployProject(id, files);
 
         ctx.response.status = 201;
-        ctx.response.body = JSON.stringify(result);
+        ctx.response.body = JSON.stringify({
+            project,
+            deployment,
+            url: createUrl(project, deployment)
+        });
     });
-}
-
-async function deployProject(code: string, projectId?: string) {
-    const client = new DenoSubhostingClient();
-    const files = new Map<string, string>();
-    files.set("main.ts", code);
-
-    if (!projectId) {
-        const project = await client.createProject();
-        projectId = project.id;
-    }
-
-    const project = await client.getProject(projectId);
-    const deployment = await client.deployProject(projectId, files);
-
-    return {
-        project,
-        deployment,
-        url: createUrl(project, deployment)
-    };
 }
