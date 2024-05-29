@@ -25,10 +25,10 @@ You'll need:
 
 * Deno installed
 * A Deno Deploy account
-* A Deno Deploy Access Token
-* A Deno Subhosting Account and Organisation Created
+* A Deno Deploy access token
+* A Deno Subhosting Account with an Organization created
 
-Once you have youur accounts, you'll need to create a `.env` file in the root of the project with the following contents:
+Once you have your accounts, you'll need to create a `.env` file in the root of the project with the following contents:
 
 ```text
 DEPLOY_ORG_ID=283....
@@ -40,7 +40,6 @@ With your `Org Id` and `Access Token` in place so you can run the app.
 ### How to run
 
 ```bash
-deno install
 deno task start
 ```
 
@@ -72,4 +71,4 @@ If you're looking to diagnose issues, you can run `deno task serve` to start a p
 
 ### React Notes
 
-This example uses the latest version of `React` and is configured for HMR (Hot Module Replacement) so you can see changes in real-time as you develop. `React Router` is also included to handle the routing for the app, along with appropraite wildcard routing configuration so that refreshing the page will still load the app.
+This example uses the latest version of `React` and is configured for HMR (Hot Module Replacement) so you can see changes in real-time as you develop. `React Router` is also included to handle the routing for the app, along with appropriate wildcard routing configuration so that refreshing the page will still load the app.

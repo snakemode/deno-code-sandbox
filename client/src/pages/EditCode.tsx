@@ -10,6 +10,7 @@ export default function EditCode() {
   const [searchParams, setSearchParams] = useSearchParams();
   
   // Editor state
+  const [running, setRunning] = useState<string>("Run");
   const [url, setUrl] = useState<string>('');
   const [status, setStatus] = useState<string>('pending');
   const [code, setCode] = useState<string>('');
@@ -42,19 +43,23 @@ export default function EditCode() {
 
   // UI Callbacks
   const deployChanges = async () => {
+    setRunning("Running...");
+    
     // This will create a new deployment and generate a new URL.
     // The serve isn't ready until the `waitForDeployment` promise resolves.
     const { deployment } = await client.deployProject(code, id!);
     const response = await client.waitForDeployment(deployment.id);
-
+    
     setUrl(response.url)
     setStatus(response.deployment.status);
+    
+    setRunning("Run");
   };
 
   return (
     <div className="editor">
       <textarea className="code" value={code} onChange={ e => setCode(e.target.value) } />        
-      <button className="run" onClick={deployChanges}>Run</button>
+      <button className="run" onClick={deployChanges}>{running}</button>
       <DeploymentViewer url={url} status={status} />
     </div>
   )

@@ -12,7 +12,7 @@ export default function DeploymentViewer(props: Props) {
     const notReady = (<div>{status}</div>);
     const preview = (
         <div>
-            <div>{url}</div>
+            <div className="url"><a href={url}>{url}</a></div>
             <iframe src={url} title="sandbox" className="sandbox" />
         </div>
     );
